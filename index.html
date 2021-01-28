@@ -31,7 +31,7 @@
             <div class="col-md-4">
                 <div class="withdraw status">
                     <h5>Withdraw</h5>
-                     <h2>$00</h2>
+                     <h2>$<span id="currentWithdraw">00</span></h2>
                 </div>
             </div>
             <div class="col-md-4">
@@ -53,9 +53,9 @@
             <div class="col-md-6">
                <div class="submit-area">
                 <h4>Withdraw</h4>
-                <input type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                <input id="withdrawAmount" type="text" class="form-control" placeholder="$ amount you want to withdraw">
                 <br>
-                <button class="btn btn-success">Withdraw</button>
+                <button id="addWithdraw" class="btn btn-success">Withdraw</button>
                </div>
             </div>
         </div>
@@ -82,10 +82,7 @@
          const depositBtn = document.getElementById("addDeposit");
         //  deposit button এ একটা event add কর
         depositBtn.addEventListener("click",function(){
-            // deposit amount নামে যে input অপশন আছে ওটাকে ধরো
-            const depositAmount = document.getElementById("depositAmount").value;
-            //deposit amount'র মধ্যে যে number add করবো তা string আকারে আছে।ওটাকে float এ convert করো
-            const depositNumber = parseFloat(depositAmount);
+           const depositNumber = getInputNumber("depositAmount");
 
             updateSpanText("currentDeposit",depositNumber);
             updateSpanText("currentBalance",depositNumber);
@@ -94,12 +91,30 @@
             document.getElementById("depositAmount").value="";           
         })
 
-        function updateSpanText(id,depositNumber){
+
+        // withdraw button event handler
+        const withdrawBtn = document.getElementById("addWithdraw");
+        withdrawBtn.addEventListener("click", function(){
+            const withdrawNumber = getInputNumber("withdrawAmount");
+            
+            
+            updateSpanText("currentWithdraw",withdrawNumber);
+            updateSpanText("currentBalance",-1*withdrawNumber);
+            document.getElementById("withdrawAmount").value=""; 
+        })
+
+        function getInputNumber(id){
+            const amount = document.getElementById(id).value;
+            const amountNumber = parseFloat(amount);
+            return amountNumber;
+        }
+
+        function updateSpanText(id,addedNumber){
              // current balance নামে যে id আছে তার inner text'কে ধরো
             const current= document.getElementById(id).innerText;
             // current balance'র ভিতরে যে string আসুক না কেনো তাকে float-এ convert করো
             const currentNumber = parseFloat(current);
-            const totalAmount = depositNumber + currentNumber;
+            const totalAmount = addedNumber + currentNumber;
             document.getElementById(id).innerText = totalAmount;
         }
     </script>
