@@ -37,7 +37,7 @@
             <div class="col-md-4">
                 <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$<span class="currentBalance">1240</span> </h2>
+                    <h2>$<span id="currentBalance">1240</span> </h2>
                 </div>
             </div>
         </div>
@@ -87,20 +87,21 @@
             //deposit amount'র মধ্যে যে number add করবো তা string আকারে আছে।ওটাকে float এ convert করো
             const depositNumber = parseFloat(depositAmount);
 
-            const currentDeposit = document.getElementById("currentDeposit").innerText;
-             //current deposit'র মধ্যে যে number add করবো তা string আকারে আছে।ওটাকে float এ convert করো
-            const currentDepositNumber = parseFloat(currentDeposit);
-            const totalDeposit = depositNumber + currentDepositNumber ;
+            updateSpanText("currentDeposit",depositNumber);
+            updateSpanText("currentBalance",depositNumber);
 
-            document.getElementById("currentDeposit").innerText = totalDeposit;
-
-            const currentBalance = document.getElementById("currentBalance").innerText
             // amount u want to deposit এখানে কোন কিছু input দিবার পর যাতে তা আগের যায়গায় যায়
-            document.getElementById("depositAmount").value="";
-
+            document.getElementById("depositAmount").value="";           
         })
 
-
+        function updateSpanText(id,depositNumber){
+             // current balance নামে যে id আছে তার inner text'কে ধরো
+            const current= document.getElementById(id).innerText;
+            // current balance'র ভিতরে যে string আসুক না কেনো তাকে float-এ convert করো
+            const currentNumber = parseFloat(current);
+            const totalAmount = depositNumber + currentNumber;
+            document.getElementById(id).innerText = totalAmount;
+        }
     </script>
 </body>
 </html>
