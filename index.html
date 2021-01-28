@@ -20,8 +20,82 @@
             <button id="login" class="btn btn-success">Enter</button>
         </div>
     </div>
+    <div id="transaction-area">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="deposit status">
+                    <h5>Deposit</h5>
+                    <h2>$<span id="currentDeposit">00</span></h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="withdraw status">
+                    <h5>Withdraw</h5>
+                     <h2>$00</h2>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="balance status">
+                    <h5>Balance</h5>
+                    <h2>$1240</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="submit-area">
+                    <h4>Deposit</h4>
+                     <input id="depositAmount" type="text" class="form-control" placeholder="$ amount you want to deposit">
+                     <br>
+                     <button id="addDeposit" class="btn btn-success">Deposit</button> 
+                </div>
+            </div>
+            <div class="col-md-6">
+               <div class="submit-area">
+                <h4>Withdraw</h4>
+                <input type="text" class="form-control" placeholder="$ amount you want to withdraw">
+                <br>
+                <button class="btn btn-success">Withdraw</button>
+               </div>
+            </div>
+        </div>
+    </div>
     <script>
-        
+        // log in button event handler
+        //  log-in যে button আছে,ওটাকে ধরো
+        const loginBtn = document.getElementById("login");
+        // এবার লগইন বাটনকে ক্লিক করলে যাতে ইভেন্ট এ্যাড হয় তাই করো
+        loginBtn.addEventListener("click", function(){
+            // login-area আংশকে ভ্যানিস করতে চাই সেইজন্য login-area id দিয়ে একে ধরছি
+           const loginArea = document.getElementById("login-area")
+        //এই login-areaতে ক্লিক করলে সব ভ্যানিস হয়ে যাবে।
+           loginArea.style.display = "none";
+           const transactionArea = document.getElementById("transaction-area");
+        //    transaction-areaকে শো করতে চাই
+           transactionArea.style.display = "block";
+        })
+
+
+        // deposit button event handler
+
+         //  addDeposit নামে যে button আছে,ওটাকে ধরো
+         const depositBtn = document.getElementById("addDeposit");
+        //  deposit button এ একটা event add কর
+        depositBtn.addEventListener("click",function(){
+            // deposit amount নামে যে input অপশন আছে ওটাকে ধরো
+            const depositAmount = document.getElementById("depositAmount").value;
+            //deposit amount'র মধ্যে যে number add করবো তা string আকারে আছে।ওটাকে float এ convert করো
+            const depositNumber = parseFloat(depositAmount);
+
+            const currentDeposit = document.getElementById("currentDeposit").innerText;
+            const currentDepositNumber = parseFloat(currentDeposit);
+            const totalDeposit = depositNumber + currentDeposit ;
+            console.log(totalDeposit);
+
+            document.getElementById("currentDeposit").innerText = totalDeposit;
+        })
+
+
     </script>
 </body>
 </html>
