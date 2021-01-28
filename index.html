@@ -37,7 +37,7 @@
             <div class="col-md-4">
                 <div class="balance status">
                     <h5>Balance</h5>
-                    <h2>$1240</h2>
+                    <h2>$<span class="currentBalance">1240</span> </h2>
                 </div>
             </div>
         </div>
@@ -88,11 +88,16 @@
             const depositNumber = parseFloat(depositAmount);
 
             const currentDeposit = document.getElementById("currentDeposit").innerText;
+             //current deposit'র মধ্যে যে number add করবো তা string আকারে আছে।ওটাকে float এ convert করো
             const currentDepositNumber = parseFloat(currentDeposit);
-            const totalDeposit = depositNumber + currentDeposit ;
-            console.log(totalDeposit);
+            const totalDeposit = depositNumber + currentDepositNumber ;
 
             document.getElementById("currentDeposit").innerText = totalDeposit;
+
+            const currentBalance = document.getElementById("currentBalance").innerText
+            // amount u want to deposit এখানে কোন কিছু input দিবার পর যাতে তা আগের যায়গায় যায়
+            document.getElementById("depositAmount").value="";
+
         })
 
 
